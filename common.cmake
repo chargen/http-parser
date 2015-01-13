@@ -16,8 +16,8 @@ FIND_PACKAGE (Threads)
 
 if(CMAKE_USE_PTHREADS_INIT)
     if( ${CMAKE_SYSTEM_NAME} MATCHES "Linux" )
-        set(CMAKE_C_FLAGS ${CMAKE_C_FLAGS} "-pthread")
-        set(CMAKE_C_FLAGS ${CMAKE_CXX_FLAGS} "-pthread")
+        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pthread")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
         set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pthread")
     endif()
 endif()
@@ -25,11 +25,11 @@ endif()
 if (${CXX11} MATCHES "ON")
     # Compiler-specific C++11 activation.
     if (${CMAKE_CXX_COMPILER_ID} MATCHES "GNU")
-        set(CMAKE_CXX_FLAGS                "-Wall -std=c++11")
-        set(CMAKE_CXX_FLAGS_DEBUG          "-O0 -g")
-        set(CMAKE_CXX_FLAGS_MINSIZEREL     "-Os -DNDEBUG")
-        set(CMAKE_CXX_FLAGS_RELEASE        "-O4 -DNDEBUG")
-        set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O2 -g")
+        set(CMAKE_CXX_FLAGS                "${CMAKE_CXX_FLAGS} -Wall -std=c++11")
+        set(CMAKE_CXX_FLAGS_DEBUG          "${CMAKE_CXX_FLAGS_DEBUG} -O0 -g")
+        set(CMAKE_CXX_FLAGS_MINSIZEREL     "${CMAKE_CXX_FLAGS_MINSIZEREL} -Os -DNDEBUG")
+        set(CMAKE_CXX_FLAGS_RELEASE        "${CMAKE_CXX_FLAGS_RELEASE} -O4 -DNDEBUG")
+        set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} -O2 -g")
 
         execute_process(
             COMMAND ${CMAKE_CXX_COMPILER} -dumpversion OUTPUT_VARIABLE GCC_VERSION)
@@ -38,11 +38,11 @@ if (${CXX11} MATCHES "ON")
         endif ()
     elseif (${CMAKE_CXX_COMPILER_ID} MATCHES "Clang")
 
-        set(CMAKE_CXX_FLAGS                "-Wall -std=c++11")
-        set(CMAKE_CXX_FLAGS_DEBUG          "-O0 -g")
-        set(CMAKE_CXX_FLAGS_MINSIZEREL     "-Os -DNDEBUG")
-        set(CMAKE_CXX_FLAGS_RELEASE        "-O4 -DNDEBUG")
-        set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O2 -g")
+        set(CMAKE_CXX_FLAGS                "${CMAKE_CXX_FLAGS} -Wall -std=c++11")
+        set(CMAKE_CXX_FLAGS_DEBUG          "${CMAKE_CXX_FLAGS_DEBUG} -O0 -g")
+        set(CMAKE_CXX_FLAGS_MINSIZEREL     "${CMAKE_CXX_FLAGS_MINSIZEREL} -Os -DNDEBUG")
+        set(CMAKE_CXX_FLAGS_RELEASE        "${CMAKE_CXX_FLAGS_RELEASE} -O4 -DNDEBUG")
+        set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} -O2 -g")
 
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
     elseif(${CMAKE_MAKE_PROGRAM} MATCHES "(msdev|devenv|nmake|MSBuild)")
@@ -59,7 +59,7 @@ if(TODO MATCHES "ON")
 endif()
 
 
-set(LIBS ${LIBS} ${CHECK_LIBRARIES} ${PROJECT})
+set(LIBS ${PROJECT} ${LIBS} ${CHECK_LIBRARIES} ${PROJECT})
 
 include_directories( include  )
 
